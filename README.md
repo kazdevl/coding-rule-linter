@@ -1,2 +1,2 @@
-# tag-linter
-tag-linter is linter to check if a structure filed is tagged
+# coding-rule-linter
+coding-rule-linter is linter for coding rule.
