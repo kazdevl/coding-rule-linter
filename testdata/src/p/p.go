@@ -4,8 +4,8 @@ import "fmt"
 
 var _ int = 1
 var sample int = 2
-var sample1 int = 3 // want "var identifier should follow the coding rules"
-var Sample int = 4  // want "var identifier should follow the coding rules"
+var Sample int = 3
+var sample1 int = 4 // want "var identifier should follow the coding rules"
 
 const SAMPLE int = 1
 const SAMPLE_SAMPLE int = 2
@@ -26,8 +26,8 @@ const ( // want "const identifier should follow the coding rules"
 func SampleFunc() {
 	var _ int = 1
 	var sampleInFunc int = 2
-	var sample1InFunc int = 3 // want "var identifier should follow the coding rules"
-	var SampleInFunc int = 4  // want "var identifier should follow the coding rules"
+	var SampleInFunc int = 3
+	var sample1InFunc int = 4 // want "var identifier should follow the coding rules"
 
 	const SAMPLEINFUNC int = 1
 	const SAMPLE_SAMPLE_INFUNC int = 2

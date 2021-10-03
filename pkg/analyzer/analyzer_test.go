@@ -10,7 +10,7 @@ import (
 	"golang.org/x/tools/go/analysis/analysistest"
 )
 
-func TestAll(t *testing.T) {
+func Test_All(t *testing.T) {
 	wd, err := os.Getwd()
 	if err != nil {
 		t.Fatalf("Failed to ged wd: %s", err)
