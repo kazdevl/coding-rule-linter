@@ -12,10 +12,6 @@ func Test_applyVarNamingRule(t *testing.T) {
 		want  bool
 	}{
 		{
-			name:  "failed: first letter is uppercase",
-			input: "Sample",
-		},
-		{
 			name:  "failed: number exists",
 			input: "sample12",
 		},

@@ -10,7 +10,10 @@ import (
 	"golang.org/x/tools/go/ast/inspector"
 )
 
-const DOC = "code-rule-linter is analyzer that detects violations of coding rule"
+const (
+	DOC         = "code-rule-linter is analyzer that detects violations of coding rule"
+	REPORT_TEXT = "should follow the coding rules"
+)
 
 var Analyzer = &analysis.Analyzer{
 	Name:     "codingRuleLinter",
@@ -50,18 +53,17 @@ func run(pass *analysis.Pass) (interface{}, error) {
 }
 
 func validateGenDecl(n *ast.GenDecl) (string, bool) {
-	const REPORT_TEXT string = "should follow the coding rules"
 	for _, spec := range n.Specs {
 		switch s := spec.(type) {
 		case *ast.ValueSpec:
 			for _, n := range s.Names {
 				if n.Obj.Kind == ast.Var {
 					if !applyVarNamingRule(n.Obj.Name) {
-						return fmt.Sprintf("%s(%s identifier) %s", n.Obj.Name, n.Obj.Kind, REPORT_TEXT), false
+						return fmt.Sprintf("%s identifier %s, you should change from \"%s\" to correct format", n.Obj.Kind, REPORT_TEXT, n.Obj.Name), false
 					}
 				} else if n.Obj.Kind == ast.Con {
 					if !applyConstNamingRule(n.Obj.Name) {
-						return fmt.Sprintf("%s(%s identifier) %s", n.Obj.Name, n.Obj.Kind, REPORT_TEXT), false
+						return fmt.Sprintf("%s identifier %s, you should change from \"%s\" to correct format", n.Obj.Kind, REPORT_TEXT, n.Obj.Name), false
 					}
 				}
 			}
@@ -84,22 +86,22 @@ func validateFuncDecl(n *ast.FuncDecl) (string, bool) {
 	}
 
 	starExpr, ok := n.Type.Params.List[0].Type.(*ast.StarExpr)
-	if !ok {
+	if !ok { // the func that does not have pointer type argument is not target
 		return "", true
 	}
 
 	argSelector, ok := starExpr.X.(*ast.SelectorExpr)
-	if !ok {
+	if !ok { // the func that does not have reference type argument is not target
 		return "", true
 	}
 
 	argType := fmt.Sprintf("%s.%s", argSelector.X.(*ast.Ident).Name, argSelector.Sel.Name)
-	if argType != "testing.T" { // the func that does't have the testing.T arg-type is not target
+	if argType != "testing.T" { // the func that does not have the "testing.T" type argument is not target
 		return "", true
 	}
 
 	if !applyTestFuncNamingRule(n.Name.Name) {
-		return fmt.Sprintf("%s(test func name) should follow the coding rules", n.Name.Name), false // TODO 現状と理想を提示する
+		return fmt.Sprintf("test function identifier %s, you should change from \"%s\" to correct format", REPORT_TEXT, n.Name.Name), false
 	}
 	return "", true
 }

@@ -6,7 +6,7 @@ import (
 	"time"
 )
 
-func TestMissingUnderScore(t *testing.T) {} // want "test func name should follow the coding rules"
+func TestMissingUnderScore(t *testing.T) {} // want "test function identifier should follow the coding rules"
 
 func Test_Success(t *testing.T) {}
 
