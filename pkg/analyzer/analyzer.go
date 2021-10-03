@@ -37,8 +37,11 @@ func run(pass *analysis.Pass) (interface{}, error) {
 			pass.Reportf(n.Pos(), problem)
 		case *ast.FuncDecl:
 			if strings.HasSuffix(pass.Fset.File(n.Pos()).Name(), "_test.go") {
-				// TODO
-				fmt.Printf("funcdecl: %+v\n", n)
+				problem, ok := validateFuncDecl(n)
+				if ok {
+					return
+				}
+				pass.Reportf(n.Pos(), problem)
 			}
 			return
 		}
@@ -63,6 +66,40 @@ func validateGenDecl(n *ast.GenDecl) (string, bool) {
 				}
 			}
 		}
+	}
+	return "", true
+}
+
+func validateFuncDecl(n *ast.FuncDecl) (string, bool) {
+	if n.Type.Results != nil { // the func that return value is not target
+		return "", true
+	}
+
+	if len(n.Type.Params.List) != 1 { // the func that has some arguments(different type) is not target
+		return "", true
+	}
+
+	if len(n.Type.Params.List[0].Names) != 1 { // the func that has some arguments(same type) is not target
+		return "", true
+	}
+
+	starExpr, ok := n.Type.Params.List[0].Type.(*ast.StarExpr)
+	if !ok {
+		return "", true
+	}
+
+	argSelector, ok := starExpr.X.(*ast.SelectorExpr)
+	if !ok {
+		return "", true
+	}
+
+	argType := fmt.Sprintf("%s.%s", argSelector.X.(*ast.Ident).Name, argSelector.Sel.Name)
+	if argType != "testing.T" { // the func that does't have the testing.T arg-type is not target
+		return "", true
+	}
+
+	if !applyTestFuncNamingRule(n.Name.Name) {
+		return "test func name should follow the coding rules", false // TODO 現状と理想を提示する
 	}
 	return "", true
 }
