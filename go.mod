@@ -1,4 +1,4 @@
-module coding-rule-linter
+module github.com/KazuwoKiwame12/coding-rule-linter
 
 go 1.17
 
