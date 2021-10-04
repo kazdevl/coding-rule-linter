@@ -11,7 +11,7 @@ My coding rules are:
 
 ## Installation
 ```bash
-go install github.com/KazuwoKiwame12/coding-rule-linter/cmd/coding-rule-linter
+$ go install github.com/KazuwoKiwame12/coding-rule-linter/cmd/coding-rule-linter@latest
 ```
 
 ## Usage
@@ -51,7 +51,7 @@ func Sample(t *string) {
 ```
 ### Run
 ```bash
-go vet -vettool=$(which coding-rule-linter) ./...
+$ go vet -vettool=$(which coding-rule-linter) ./...
 # coding-rule-linter
 ./main.go:7:1: var identifier should follow the coding rules, you should change from "sample1" to correct format
 ./main.go:11:1: const identifier should follow the coding rules, you should change from "SamPle" to correct format
