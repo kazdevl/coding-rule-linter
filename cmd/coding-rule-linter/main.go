@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/KazuwoKiwame12/coding-rule-linter/pkg/analyzer"
+	"github.com/kazdevl/coding-rule-linter/pkg/analyzer"
 
 	"golang.org/x/tools/go/analysis/unitchecker"
 )

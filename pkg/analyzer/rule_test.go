@@ -3,7 +3,7 @@ package analyzer_test
 import (
 	"testing"
 
-	"github.com/KazuwoKiwame12/coding-rule-linter/pkg/analyzer"
+	"github.com/kazdevl/coding-rule-linter/pkg/analyzer"
 )
 
 func Test_applyVarNamingRule(t *testing.T) {
