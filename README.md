@@ -5,13 +5,13 @@ My coding rules are:
 - constant identifier should not contain lower case letter, symbols(except for underscore) or numbers.
 - test function identifier should separate "Test" and "Identifier of Target" with underscore.
 ## Badges
-[![CI](https://github.com/KazuwoKiwame12/coding-rule-linter/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/KazuwoKiwame12/coding-rule-linter/actions/workflows/ci.yml)
- [![Coverage Status](https://coveralls.io/repos/github/KazuwoKiwame12/coding-rule-linter/badge.svg?branch=main)](https://coveralls.io/github/KazuwoKiwame12/coding-rule-linter?branch=main)
-[![License](https://img.shields.io/github/license/KazuwoKiwame12/coding-rule-linter)](/LICENSE)
+[![CI](https://github.com/kazdevl/coding-rule-linter/actions/workflows/ci.yml/badge.svg?branch=main)](https://github.com/kazdevl/coding-rule-linter/actions/workflows/ci.yml)
+[![Coverage Status](https://coveralls.io/repos/github/kazdevl/coding-rule-linter/badge.svg?branch=main)](https://coveralls.io/github/kazdevl/coding-rule-linter?branch=main)
+[![License](https://img.shields.io/github/license/kazdevl/coding-rule-linter)](/LICENSE)
 
 ## Installation
 ```bash
-$ go install github.com/KazuwoKiwame12/coding-rule-linter/cmd/coding-rule-linter@latest
+$ go install github.com/kazdevl/coding-rule-linter/cmd/coding-rule-linter@latest
 ```
 
 ## Usage
